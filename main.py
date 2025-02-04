@@ -125,7 +125,7 @@ def main(args):
         
                     del best_model
                     th.cuda.empty_cache()
-                    gc.collect()  # Trigger Python garbage collection
+                    gc.collect()  
         
                 elif filename.startswith("checkpoint-2"):
                     sub_best_model_path = os.path.join(args.save_model_fold_path, filename)
@@ -140,7 +140,7 @@ def main(args):
                     
                     del sub_best_model
                     th.cuda.empty_cache()
-                    gc.collect()  # Trigger Python garbage collection
+                    gc.collect()  
 
         elif args.test:
             print(f"Model Test Fold : {fold}")
@@ -159,7 +159,7 @@ def main(args):
         
                     del best_model
                     th.cuda.empty_cache()
-                    gc.collect()  # Trigger Python garbage collection
+                    gc.collect()  
         
                 elif filename.startswith("checkpoint-2"):
                     sub_best_model_path = os.path.join(args.save_model_fold_path, filename)
@@ -175,7 +175,7 @@ def main(args):
                     
                     del sub_best_model
                     th.cuda.empty_cache()
-                    gc.collect()  # Trigger Python garbage collection
+                    gc.collect()  
 
         best_fold_result_dict[fold] = best_result
         best_fold_pred_dict[fold] = best_pred_dic
