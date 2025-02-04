@@ -14,11 +14,10 @@ warnings.filterwarnings("ignore")
 
 
 def extract_traits(text):
-    # Use regex to find the words (traits) followed by their numeric values, ignoring trailing periods
     matches = re.findall(r'(\w+)\s+([\d.]+)', text)
     
-    # Create a dictionary to store the traits and their corresponding values
-    traits_dict = {trait: float(value.rstrip('.')) for trait, value in matches[:7]}  # Using first 4 matches to account for duplicates
+    
+    traits_dict = {trait: float(value.rstrip('.')) for trait, value in matches[:7]} 
     return traits_dict
 
 
