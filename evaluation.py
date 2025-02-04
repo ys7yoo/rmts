@@ -70,27 +70,23 @@ def quadratic_weighted_kappa(rater_a, rater_b, min_rating=None, max_rating=None)
 
 
 def Quadratic_Weighted_Kappa(y_true, y_pred, total_score):
-    # 클래스 개수
     num_classes = int(total_score)+1
     
-    # 혼동 행렬(confusion matrix) 생성
     conf_matrix = np.zeros((num_classes, num_classes))
     for n in range(num_classes):
         i_c = int(y_true[n])
         j_c = int(y_pred[n])
         conf_matrix[i_c, j_c] += 1
     
-    # 가중치 행렬 생성
+    
     weights = np.zeros((num_classes, num_classes))
     for i in range(num_classes):
         for j in range(num_classes):
             weights[i, j] = ((i - j) ** 2)/((num_classes-1) ** 2)
     
-    # 가중치 행렬과 혼동 행렬의 합계 계산
     obs_sum = np.sum(conf_matrix)
     exp_sum = np.outer(np.sum(conf_matrix, axis=1), np.sum(conf_matrix, axis=0)) / obs_sum
     
-    # quadratic weighted kappa score 계산
     nom = np.sum(weights * conf_matrix)
     denom = np.sum(weights * exp_sum)
     if denom <= 0.0000001:
