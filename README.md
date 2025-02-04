@@ -25,6 +25,7 @@ Proceedings of the 2025 Conference of the North American Chapter of the Associat
 
 ### LLM-based trait-wise rationale generation system
 - Rationale generation using LLM and rubric guideline.
+![Image](https://github.com/user-attachments/assets/24487340-4328-4ece-9554-eef3420d0350)
 
 ### Essay scoring with smaller LLMs
 - Incorporating a rationale with an essay for essay scoring using S-LLMs.
