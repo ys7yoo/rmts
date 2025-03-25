@@ -220,7 +220,7 @@ def main(args):
             tokenizer = create_tokenizer(args.model_name)
             
             # Load data for current fold
-            train_data, dev_data, test_data = load_data(f"./data/{args.data}", fold)
+            train_data, dev_data, test_data = load_data(f"./data/{args.data}", fold, 'txt')
             
             # Create model
             model = create_model(args.model_name, tokenizer)
