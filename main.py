@@ -134,7 +134,7 @@ def create_model(model_name: str, tokenizer):
     
     raise ValueError(f"Unsupported model: {model_name}")
 
-def load_data(data_path: str, fold: Optional[int] = None) -> pd.DataFrame:
+def load_data(data_path: str, fold: Optional[int] = None, ext='csv') -> pd.DataFrame:
     """
     Generalized data loading with optional fold selection.
     
@@ -146,18 +146,25 @@ def load_data(data_path: str, fold: Optional[int] = None) -> pd.DataFrame:
         pd.DataFrame: Loaded dataset
     """
     if fold is not None:
-        train_path = os.path.join(data_path, f"fold_{fold}", "train.csv")
-        dev_path = os.path.join(data_path, f"fold_{fold}", "dev.csv")
-        test_path = os.path.join(data_path, f"fold_{fold}", "test.csv")
+        train_path = os.path.join(data_path, f"fold_{fold}", f"train.{ext}")
+        dev_path = os.path.join(data_path, f"fold_{fold}", f"dev.{ext}")
+        test_path = os.path.join(data_path, f"fold_{fold}", f"test.{ext}")
     else:
-        train_path = os.path.join(data_path, "train.csv")
-        dev_path = os.path.join(data_path, "dev.csv")
-        test_path = os.path.join(data_path, "test.csv")
+        train_path = os.path.join(data_path, f"train.{ext}")
+        dev_path = os.path.join(data_path, f"dev.{ext}")
+        test_path = os.path.join(data_path, f"test.{ext}")
     
     try:
-        train_data = pd.read_csv(train_path)
-        dev_data = pd.read_csv(dev_path)
-        test_data = pd.read_csv(test_path)
+        if ext == 'csv':
+            train_data = pd.read_csv(train_path)
+            dev_data = pd.read_csv(dev_path)
+            test_data = pd.read_csv(test_path)
+        elif ext == 'tsv':
+            train_data = pd.read_csv(train_path, sep='\t')
+            dev_data = pd.read_csv(dev_path, sep='\t')
+            test_data = pd.read_csv(test_path, sep='\t')
+        else:
+            raise ValueError(f"Unsupported file extension: {ext}")
         
         validate_data(train_data)
         validate_data(dev_data)
